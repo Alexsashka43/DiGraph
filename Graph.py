@@ -57,39 +57,43 @@ for coord_pos in cities:
     j = 1
     G.nodes[coord_pos]['pos'] = (coord[i + 2],coord[j + 2])
 
-print()
-#
-# # Координаты вершин храняться в словаре
-# node_pos = nx.get_node_attributes(G, 'pos')
-#
-# # Веса ребер и доп аттрибуты тоже храняться в словаре
-# arc_weight = nx.get_edge_attributes(G, 'length')
-#
-# # Отрисовываем вершины
-# nx.draw_networkx(G, node_pos, node_size=10)
-#
-# # Отрисовываем ребра
-# nx.draw_networkx_edges(G, node_pos)
-#
-# # Подписываем вершины, ребра и веса
-# nx.draw_networkx_edge_labels(G, node_pos, edge_labels=arc_weight)
-#
-# # Удалим координатные оси
-# plt.axis('off')
-#
-# # Выводим
-# plt.show()
-#
-# # Вычисляем кратчайший путь между вершиной 1 и 6 (По умолчанию в shortest_path используется алгоритм Дейкстры)
-# nx.shortest_path(G, source=1, target=6, weight="length")
-#
-# # Получаем все варианты кратчайших путей, all_p - это Генератор
-# all_p = nx.all_shortest_paths(G, source=1, target=6, weight="length")
-#
-# # Вычисляем Кратчайший путь по алгоритму Дейкстры
-# nx.dijkstra_path(G, source=1, target=6, weight="length")
+
+# Координаты вершин храняться в словаре
+node_pos = nx.get_node_attributes(G, 'pos')
+
+# Веса ребер и доп аттрибуты тоже храняться в словаре
+arc_weight = nx.get_edge_attributes(G, 'length')
+
+# Отрисовываем вершины
+nx.draw_networkx(G, node_pos, node_size=10)
+
+# Отрисовываем ребра
+nx.draw_networkx_edges(G, node_pos)
+
+# Подписываем вершины, ребра и веса
+nx.draw_networkx_edge_labels(G, node_pos, edge_labels=arc_weight)
+
+# Удалим координатные оси
+plt.axis('off')
+
+# Выводим
+plt.show()
+
+# Вычисляем кратчайший путь между вершинами (По умолчанию в shortest_path используется алгоритм Дейкстры)
+for coupe_cities_1, coupe_cities_2 in comb_city:
+    nx.shortest_path(G, source=coupe_cities_1, target=coupe_cities_2, weight="length")
+
+# Получаем все варианты кратчайших путей, all_p - это Генератор
+for coupe_cities_1, coupe_cities_2 in comb_city:
+    all_p = nx.all_shortest_paths(G, source=coupe_cities_1, target=coupe_cities_2, weight="length")
+    next(all_p)
+# Вычисляем Кратчайший путь по алгоритму Дейкстры
+for coupe_cities_1, coupe_cities_2 in comb_city:
+    nx.dijkstra_path(G, source=coupe_cities_1, target=coupe_cities_2, weight="length")
+
 # next(all_p)
-#
-# # Вычисляем длину Кратчайшего пути по алгоритму Дейкстры
-# nx.dijkstra_path_length(G, source=1, target=6, weight="length")
+
+# Вычисляем длину Кратчайшего пути по алгоритму Дейкстры
+for coupe_cities_1, coupe_cities_2 in comb_city:
+    nx.dijkstra_path_length(G, source=coupe_cities_1, target=coupe_cities_2, weight="length")
 
